@@ -1,0 +1,32 @@
+pipeline {
+   agent any
+   stages {
+       stage('write') {
+           steps {
+               script {
+                   def date = new Date()
+                   def data = "Hello Worldss\nSecond line\n" + date
+                   writeFile(file: 'prakesh.txt', text: data)
+                   sh "ls -l"
+                   sh "cat prakesh.txt"
+               }
+           }
+       }
+       stage('Build'){
+           steps{
+               script{
+        dir ("$WORKSPACE/file1") {
+       }
+     }
+           }
+       }
+       stage('read') {
+           steps {
+               script {
+                   def data = readFile(file: 'prakesh.txt')
+                   println(data)
+               }
+           }
+       }
+   }
+}
